@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.databinding.SettingsFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     private var binding: SettingsFragmentBinding? = null
@@ -48,15 +50,9 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SettingsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = SettingsFragment()
 
-        private const val TAG = "HomeFragment"
+        private const val TAG = "SettingsFragment"
 
     }
 }

@@ -6,18 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.brandon.hotelbookingapp.R
+import com.brandon.hotelbookingapp.adapters.HotelLocationsAdapter
 import com.brandon.hotelbookingapp.databinding.HomeFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private var binding: HomeFragmentBinding? = null
     private var param1: String? = null
     private var param2: String? = null
+
+    private val mLocationNames: ArrayList<String> = ArrayList()
+    private val mLocationImageUrls: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +32,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        loadLocationImages()
     }
 
     override fun onCreateView(
@@ -34,6 +42,10 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     ): View {
 
         binding = HomeFragmentBinding.inflate(layoutInflater)
+        binding!!.locationsRecyclerView.adapter =
+            HotelLocationsAdapter(requireContext(), mLocationNames, mLocationImageUrls)
+
+        binding!!.locationsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         binding!!.homeScreenTv.setOnClickListener {
             Navigation.findNavController(binding!!.root).navigate(R.id.navigate_to_settings)
@@ -47,15 +59,23 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         binding = null
     }
 
+
+    private fun loadLocationImages() {
+        mLocationImageUrls.add("https://i.imgur.com/FWGIkLU.jpg")
+        mLocationNames.add("London")
+        mLocationImageUrls.add("https://i.imgur.com/P9IVqkS.jpg")
+        mLocationNames.add("Japan")
+        mLocationImageUrls.add("https://i.imgur.com/xdLQvy2.jpg")
+        mLocationNames.add("New York")
+        mLocationImageUrls.add("https://i.imgur.com/Zm7BoLJ.jpg")
+        mLocationNames.add("Venice")
+        mLocationImageUrls.add("https://i.imgur.com/5G0SJtn.jpg")
+        mLocationNames.add("Paris")
+    }
     companion object {
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SettingsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = HomeFragment()
 
         private const val TAG = "HomeFragment"
     }
