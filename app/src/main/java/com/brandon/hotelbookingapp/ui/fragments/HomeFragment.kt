@@ -1,15 +1,19 @@
 package com.brandon.hotelbookingapp.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.adapters.HotelLocationsAdapter
 import com.brandon.hotelbookingapp.databinding.HomeFragmentBinding
+import com.brandon.hotelbookingapp.utils.AppUtils
+import com.brandon.hotelbookingapp.utils.AppUtils.isWifiAvailable
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -45,7 +49,8 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         binding!!.locationsRecyclerView.adapter =
             HotelLocationsAdapter(requireContext(), mLocationNames, mLocationImageUrls)
 
-        binding!!.locationsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding!!.locationsRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         binding!!.homeScreenTv.setOnClickListener {
             Navigation.findNavController(binding!!.root).navigate(R.id.navigate_to_settings)
@@ -61,6 +66,13 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
 
     private fun loadLocationImages() {
+        if (!isWifiAvailable(requireContext())) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.no_internet_connection_active_error),
+                Toast.LENGTH_LONG
+            ).show()
+        }
         mLocationImageUrls.add("https://i.imgur.com/FWGIkLU.jpg")
         mLocationNames.add("London")
         mLocationImageUrls.add("https://i.imgur.com/P9IVqkS.jpg")
@@ -72,6 +84,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         mLocationImageUrls.add("https://i.imgur.com/5G0SJtn.jpg")
         mLocationNames.add("Paris")
     }
+
     companion object {
 
         @JvmStatic
