@@ -13,6 +13,9 @@
         <action
             android:id="@+id/navigate_to_settings"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/navigate_to_hotel_location"
+            app:destination="@id/hotelLocationFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -22,5 +25,14 @@
         <action
             android:id="@+id/navigate_to_home"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hotelLocationFragment"
+        android:name="com.brandon.hotelbookingapp.ui.fragments.HotelLocationFragment"
+        android:label="hotel_location_fragment"
+        tools:layout="@layout/hotel_location_fragment" >
+        <argument
+            android:name="locationName"
+            app:argType="string" />
     </fragment>
 </navigation>

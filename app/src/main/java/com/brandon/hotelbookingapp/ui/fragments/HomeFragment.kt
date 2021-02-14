@@ -51,7 +51,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         binding!!.homeScreenTv.setOnClickListener {
-            Navigation.findNavController(binding!!.root).navigate(R.id.navigate_to_settings)
+            Navigation.findNavController(binding!!.root).navigate(R.id.navigate_to_hotel_location)
         }
 
         return binding!!.root

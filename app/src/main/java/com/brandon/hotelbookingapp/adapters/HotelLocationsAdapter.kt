@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.model.HotelLocations
+import com.brandon.hotelbookingapp.ui.fragments.HomeFragmentDirections
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -60,6 +61,8 @@ class HotelLocationsAdapter(
 
         holder.parentLayout.setOnClickListener {
             Log.d(TAG, "Clicked ${mLocations[position].locationName}")
+            val action = HomeFragmentDirections.navigateToHotelLocation(mLocations[position].locationName)
+            Navigation.findNavController(holder.itemView).navigate(action)
         }
     }
 

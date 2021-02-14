@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -74,7 +75,5 @@ dependencies {
 
     // Circle image view dependency
     implementation "de.hdodenhof:circleimageview:$circle_image_view_version"
-
-
 
 }
