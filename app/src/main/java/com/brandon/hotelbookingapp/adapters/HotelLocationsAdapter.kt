@@ -7,20 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.brandon.hotelbookingapp.R
+import com.brandon.hotelbookingapp.model.HotelLocations
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 
 
 class HotelLocationsAdapter(
     context: Context,
-    locationsNames: ArrayList<String>,
-    locations: ArrayList<String>
+    locations: ArrayList<HotelLocations>
 ) : RecyclerView.Adapter<HotelLocationsAdapter.HotelLocationsViewHolder>() {
 
-    private var mLocationsNames: ArrayList<String> = ArrayList()
-    private var mLocations: ArrayList<String> = ArrayList()
+    private var mLocations: ArrayList<HotelLocations> = ArrayList()
     private var mContext: Context? = null
 
     companion object {
@@ -29,7 +29,6 @@ class HotelLocationsAdapter(
 
     init {
         mContext = context
-        mLocationsNames = locationsNames
         mLocations = locations
     }
 
@@ -53,16 +52,15 @@ class HotelLocationsAdapter(
 
         Glide.with(mContext!!)
             .asBitmap()
-            .load(mLocations[position])
+            .load(mLocations[position].locationUrl)
             .placeholder(R.drawable.ic_launcher_background)
             .into(holder.location)
 
-        holder.locationName.text = mLocationsNames[position]
+        holder.locationName.text = mLocations[position].locationName
 
         holder.parentLayout.setOnClickListener {
-            Log.d(TAG, "Clicked ${mLocationsNames[position]}")
+            Log.d(TAG, "Clicked ${mLocations[position].locationName}")
         }
-
     }
 
     override fun getItemCount(): Int {

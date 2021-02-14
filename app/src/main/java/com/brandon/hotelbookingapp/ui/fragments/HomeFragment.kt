@@ -1,7 +1,6 @@
 package com.brandon.hotelbookingapp.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.adapters.HotelLocationsAdapter
 import com.brandon.hotelbookingapp.databinding.HomeFragmentBinding
-import com.brandon.hotelbookingapp.utils.AppUtils
+import com.brandon.hotelbookingapp.model.HotelLocations
 import com.brandon.hotelbookingapp.utils.AppUtils.isWifiAvailable
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,8 +26,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private var param1: String? = null
     private var param2: String? = null
 
-    private val mLocationNames: ArrayList<String> = ArrayList()
-    private val mLocationImageUrls: ArrayList<String> = ArrayList()
+    private val mLocations: ArrayList<HotelLocations> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +45,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
         binding = HomeFragmentBinding.inflate(layoutInflater)
         binding!!.locationsRecyclerView.adapter =
-            HotelLocationsAdapter(requireContext(), mLocationNames, mLocationImageUrls)
+            HotelLocationsAdapter(requireContext(), mLocations)
 
         binding!!.locationsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -64,7 +62,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         binding = null
     }
 
-
     private fun loadLocationImages() {
         if (!isWifiAvailable(requireContext())) {
             Toast.makeText(
@@ -73,16 +70,21 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
                 Toast.LENGTH_LONG
             ).show()
         }
-        mLocationImageUrls.add("https://i.imgur.com/FWGIkLU.jpg")
-        mLocationNames.add("London")
-        mLocationImageUrls.add("https://i.imgur.com/P9IVqkS.jpg")
-        mLocationNames.add("Japan")
-        mLocationImageUrls.add("https://i.imgur.com/xdLQvy2.jpg")
-        mLocationNames.add("New York")
-        mLocationImageUrls.add("https://i.imgur.com/Zm7BoLJ.jpg")
-        mLocationNames.add("Venice")
-        mLocationImageUrls.add("https://i.imgur.com/5G0SJtn.jpg")
-        mLocationNames.add("Paris")
+        val locationLondon =
+            HotelLocations("https://i.imgur.com/FWGIkLU.jpg", "London")
+        val locationJapan =
+            HotelLocations("https://i.imgur.com/P9IVqkS.jpg", "Japan")
+        val locationNewYork =
+            HotelLocations("https://i.imgur.com/xdLQvy2.jpg", "New York")
+        val locationVenice =
+            HotelLocations("https://i.imgur.com/Zm7BoLJ.jpg", "Venice")
+        val locationParis =
+            HotelLocations("https://i.imgur.com/5G0SJtn.jpg", "Paris")
+        mLocations.add(locationLondon)
+        mLocations.add(locationJapan)
+        mLocations.add(locationNewYork)
+        mLocations.add(locationVenice)
+        mLocations.add(locationParis)
     }
 
     companion object {
@@ -92,6 +94,4 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
         private const val TAG = "HomeFragment"
     }
-
-
 }
