@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-@AndroidEntryPoint
+
 class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     private var binding: SettingsFragmentBinding? = null

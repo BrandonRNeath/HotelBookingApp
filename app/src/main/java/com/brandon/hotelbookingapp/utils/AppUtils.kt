@@ -3,6 +3,7 @@ package com.brandon.hotelbookingapp.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import com.brandon.hotelbookingapp.R
 
 
 object AppUtils {
@@ -12,4 +13,18 @@ object AppUtils {
                 hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
             } ?: false
         }
+
+    fun calculateHotelReviewFace(rating: Int): Int {
+        var result = 0
+
+        when (rating) {
+            in 0..19 -> result = R.drawable.terrible_bad_review_face_24
+            in 20..39 -> result = R.drawable.bad_review_face_24
+            in 40..59 -> result = R.drawable.average_review_face_24
+            in 60..79 -> result = R.drawable.good_review_face_24
+            in 80..100 -> result = R.drawable.excellent_review_face_24
+        }
+
+        return result
+    }
 }

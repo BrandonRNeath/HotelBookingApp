@@ -13,13 +13,11 @@ import com.brandon.hotelbookingapp.adapters.HotelLocationsAdapter
 import com.brandon.hotelbookingapp.databinding.HomeFragmentBinding
 import com.brandon.hotelbookingapp.model.HotelLocations
 import com.brandon.hotelbookingapp.utils.AppUtils.isWifiAvailable
-import dagger.hilt.android.AndroidEntryPoint
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private var binding: HomeFragmentBinding? = null
@@ -50,10 +48,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         binding!!.locationsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        binding!!.homeScreenTv.setOnClickListener {
-            Navigation.findNavController(binding!!.root).navigate(R.id.navigate_to_hotel_location)
-        }
-
         return binding!!.root
     }
 
@@ -80,11 +74,24 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             HotelLocations("https://i.imgur.com/Zm7BoLJ.jpg", "Venice")
         val locationParis =
             HotelLocations("https://i.imgur.com/5G0SJtn.jpg", "Paris")
+        val locationRiyadh =
+            HotelLocations("https://i.imgur.com/SKy9VME.jpg", "Riyadh")
+        val locationsMadrid =
+            HotelLocations("https://i.imgur.com/GpWKCt4.jpeg", "Madrid")
+        val locationsLisbon =
+            HotelLocations("https://i.imgur.com/LncsBc3.jpeg", "Lisbon")
+        val locationStockholm =
+            HotelLocations("https://i.imgur.com/JYMpWf0.jpeg", "Stockholm")
         mLocations.add(locationLondon)
         mLocations.add(locationJapan)
         mLocations.add(locationNewYork)
         mLocations.add(locationVenice)
         mLocations.add(locationParis)
+        mLocations.add(locationRiyadh)
+        mLocations.add(locationsMadrid)
+        mLocations.add(locationsLisbon)
+        mLocations.add(locationStockholm)
+        mLocations.shuffle()
     }
 
     companion object {

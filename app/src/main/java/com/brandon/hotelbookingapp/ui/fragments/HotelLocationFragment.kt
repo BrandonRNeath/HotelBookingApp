@@ -44,6 +44,6 @@ class HotelLocationFragment : Fragment() {
         @JvmStatic
         fun newInstance() = HotelLocationFragment()
 
-        private const val TAG = "HelloLocationFragment"
+        private const val TAG = "HotelLocationFragment"
     }
 }
