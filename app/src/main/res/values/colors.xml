@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="hotel_location_background_color">#FEFBD5</color>
     <color name="hotel_location_background_text_color">#FF000000</color>
+    <color name="hotel_listing_background_color">#8DB1B5</color>
 </resources>

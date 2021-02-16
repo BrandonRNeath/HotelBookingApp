@@ -14,6 +14,7 @@ import com.brandon.hotelbookingapp.model.HotelLocations
 import com.brandon.hotelbookingapp.ui.fragments.HomeFragmentDirections
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
+import java.lang.Exception
 
 
 class HotelLocationsAdapter(
@@ -23,10 +24,6 @@ class HotelLocationsAdapter(
 
     private var mLocations: ArrayList<HotelLocations> = ArrayList()
     private var mContext: Context? = null
-
-    companion object {
-        private const val TAG = "HotelLocationsAdapter"
-    }
 
     init {
         mContext = context
@@ -51,17 +48,24 @@ class HotelLocationsAdapter(
 
     override fun onBindViewHolder(holder: HotelLocationsViewHolder, position: Int) {
 
-        Glide.with(mContext!!)
-            .asBitmap()
-            .load(mLocations[position].locationUrl)
-            .placeholder(R.drawable.ic_launcher_background)
-            .into(holder.location)
+        try {
+            Glide.with(mContext!!)
+                .asBitmap()
+                .load(mLocations[position].locationUrl)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(holder.location)
+        } catch (ex: Exception) {
+            Log.e(TAG, mContext!!
+                    .getString(R.string.loading_hotel_location_images_error) + ex.printStackTrace()
+            )
+        }
 
         holder.locationName.text = mLocations[position].locationName
 
         holder.parentLayout.setOnClickListener {
             Log.d(TAG, "Clicked ${mLocations[position].locationName}")
-            val action = HomeFragmentDirections.navigateToHotelLocation(mLocations[position].locationName)
+            val action =
+                HomeFragmentDirections.navigateToHotelLocation(mLocations[position].locationName)
             Navigation.findNavController(holder.itemView).navigate(action)
         }
     }
@@ -69,4 +73,9 @@ class HotelLocationsAdapter(
     override fun getItemCount(): Int {
         return mLocations.size
     }
+
+    companion object {
+        private const val TAG = "HotelLocationsAdapter"
+    }
+
 }

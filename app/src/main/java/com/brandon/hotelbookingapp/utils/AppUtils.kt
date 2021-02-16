@@ -7,6 +7,7 @@ import com.brandon.hotelbookingapp.R
 
 
 object AppUtils {
+    
     fun isWifiAvailable(context: Context) =
         (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).run {
             getNetworkCapabilities(activeNetwork)?.run {
