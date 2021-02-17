@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.adapters.HotelListingAdapter
@@ -52,20 +51,11 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         binding!!.locationsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-
-
         binding!!.hotelListingsRecyclerView.adapter =
             HotelListingAdapter(requireContext(), mHotelListings)
 
         binding!!.hotelListingsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
-        binding!!.hotelListingsRecyclerView.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
         return binding!!.root
     }
