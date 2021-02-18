@@ -1,0 +1,17 @@
+[
+  {
+    "hotel_name": "London Hotel",
+    "hotel_image_url": "https://i.imgur.com/pq16dcf.jpg",
+    "hotel_ranking": 85
+  },
+  {
+    "hotel_name": "Underwater Hotel",
+    "hotel_image_url": "https://i.imgur.com/HFzX8Pr.jpeg",
+    "hotel_ranking": 23
+  },
+  {
+    "hotel_name": "Bora Bora Hotel",
+    "hotel_image_url": "https://i.imgur.com/6eS1mymb.jpg",
+    "hotel_ranking": 54
+  }
+]

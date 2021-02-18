@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.brandon.hotelbookingapp.R
-import com.brandon.hotelbookingapp.model.HotelListing
+import com.brandon.hotelbookingapp.db.model.HotelListing
 import com.brandon.hotelbookingapp.utils.AppUtils.calculateHotelReviewFace
 import com.bumptech.glide.Glide
 

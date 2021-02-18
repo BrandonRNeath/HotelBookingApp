@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.adapters.HotelListingAdapter
 import com.brandon.hotelbookingapp.adapters.HotelLocationsAdapter
 import com.brandon.hotelbookingapp.databinding.HomeFragmentBinding
-import com.brandon.hotelbookingapp.model.HotelListing
+import com.brandon.hotelbookingapp.db.model.ApplicationViewModel
+import com.brandon.hotelbookingapp.db.model.HotelListing
 import com.brandon.hotelbookingapp.model.HotelLocations
 import com.brandon.hotelbookingapp.utils.AppUtils.isWifiAvailable
 
@@ -21,6 +23,7 @@ private const val ARG_PARAM2 = "param2"
 
 class HomeFragment : Fragment(R.layout.home_fragment) {
 
+    private lateinit var applicationViewModel: ApplicationViewModel
     private var binding: HomeFragmentBinding? = null
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +38,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             param2 = it.getString(ARG_PARAM2)
         }
         loadLocationImages()
-        loadHotelListings()
+        applicationViewModel = ViewModelProvider(this).get(ApplicationViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -101,23 +104,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         mLocations.add(locationLisbon)
         mLocations.add(locationStockholm)
         mLocations.shuffle()
-    }
-
-    private fun loadHotelListings() {
-        // Random hotels with random values
-        val hotelListing1 =
-            HotelListing("https://i.imgur.com/pq16dcf.jpg", "London Hotel", 85)
-        val hotelListing2 =
-            HotelListing(
-                "https://i.imgur.com/HFzX8Pr.jpeg",
-                "Underwater hotel",
-                23
-            )
-        val hotelListing3 =
-            HotelListing("https://i.imgur.com/6eS1mymb.jpg", "Bora Bora Hotel", 54)
-        mHotelListings.add(hotelListing1)
-        mHotelListings.add(hotelListing2)
-        mHotelListings.add(hotelListing3)
     }
 
     companion object {
