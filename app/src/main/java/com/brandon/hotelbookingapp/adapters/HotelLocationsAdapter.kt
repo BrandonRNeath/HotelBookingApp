@@ -52,7 +52,8 @@ class HotelLocationsAdapter(
             Glide.with(mContext!!)
                 .asBitmap()
                 .load(mLocations[position].locationUrl)
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.loading_image_default_placeholder)
+                .error(R.drawable.location_placeholder_24)
                 .into(holder.location)
         } catch (ex: Exception) {
             Log.e(TAG, mContext!!

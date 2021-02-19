@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.databinding.SettingsFragmentBinding
-import dagger.hilt.android.AndroidEntryPoint
 
 
 private const val ARG_PARAM1 = "param1"
