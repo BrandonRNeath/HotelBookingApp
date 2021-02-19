@@ -78,5 +78,4 @@ class HotelLocationsAdapter(
     companion object {
         private const val TAG = "HotelLocationsAdapter"
     }
-
 }

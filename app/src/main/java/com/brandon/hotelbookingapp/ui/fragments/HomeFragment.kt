@@ -1,6 +1,7 @@
 package com.brandon.hotelbookingapp.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,6 @@ import com.brandon.hotelbookingapp.adapters.HotelListingAdapter
 import com.brandon.hotelbookingapp.adapters.HotelLocationsAdapter
 import com.brandon.hotelbookingapp.databinding.HomeFragmentBinding
 import com.brandon.hotelbookingapp.db.model.ApplicationViewModel
-import com.brandon.hotelbookingapp.db.model.HotelListing
 import com.brandon.hotelbookingapp.model.HotelLocations
 import com.brandon.hotelbookingapp.utils.AppUtils.isWifiAvailable
 
@@ -27,9 +27,9 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private var binding: HomeFragmentBinding? = null
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var hotelListingAdapter: HotelListingAdapter
 
     private val mLocations: ArrayList<HotelLocations> = ArrayList()
-    private val mHotelListings: ArrayList<HotelListing> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             param2 = it.getString(ARG_PARAM2)
         }
         loadLocationImages()
-        applicationViewModel = ViewModelProvider(this).get(ApplicationViewModel::class.java)
+
     }
 
     override fun onCreateView(
@@ -54,11 +54,18 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         binding!!.locationsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        binding!!.hotelListingsRecyclerView.adapter =
-            HotelListingAdapter(requireContext(), mHotelListings)
+        hotelListingAdapter = HotelListingAdapter(requireContext(), mutableListOf())
+
+        binding!!.hotelListingsRecyclerView.adapter = hotelListingAdapter
 
         binding!!.hotelListingsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        applicationViewModel = ViewModelProvider(this).get(ApplicationViewModel::class.java)
+        applicationViewModel.getHotelListings().observe(viewLifecycleOwner, { hotelListings ->
+            hotelListingAdapter.updateHotelListings(hotelListings)
+        })
+
 
         return binding!!.root
     }
