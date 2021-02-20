@@ -9,19 +9,27 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.brandon.hotelbookingapp.R
+import com.brandon.hotelbookingapp.db.model.ApplicationViewModel
+import com.brandon.hotelbookingapp.db.model.HotelFavourite
 import com.brandon.hotelbookingapp.db.model.HotelListing
 import com.brandon.hotelbookingapp.utils.AppUtils.calculateHotelReviewFace
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HotelListingAdapter(
+    applicationViewModel: ApplicationViewModel,
     context: Context,
     private val hotelListings: MutableList<HotelListing>
 ) : RecyclerView.Adapter<HotelListingAdapter.HotelListingViewHolder>() {
 
     private var mContext: Context? = null
+    private var mApplicationViewModel: ApplicationViewModel?
 
     init {
         mContext = context
+        mApplicationViewModel = applicationViewModel
     }
 
     inner class HotelListingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -43,6 +51,7 @@ class HotelListingAdapter(
     }
 
     override fun onBindViewHolder(holder: HotelListingViewHolder, position: Int) {
+        var isSelected = false
 
         try {
             Glide.with(mContext!!)
@@ -52,7 +61,8 @@ class HotelListingAdapter(
                 .error(R.drawable.location_placeholder_24)
                 .into(holder.hotelImage)
         } catch (ex: Exception) {
-            Log.e(TAG, mContext!!
+            Log.e(
+                TAG, mContext!!
                     .getString(R.string.loading_hotel_listing_images_error) + ex.printStackTrace()
             )
         }
@@ -66,12 +76,30 @@ class HotelListingAdapter(
         holder.hotelRatingFaceReview
             .setImageResource(calculateHotelReviewFace(hotelListings[position].hotelRating))
 
-        holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_selected)
+        holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_not_selected)
 
         holder.favouriteStarImage.setOnClickListener {
-            Log.d(TAG, "Favourite Star clicked")
+            val hotelFavourite = HotelFavourite(
+                id = hotelListings[position].id,
+                hotelImageUrl = hotelListings[position].hotelImageUrl,
+                hotelName = hotelListings[position].hotelName,
+                hotelRating = hotelListings[position].hotelRating
+            )
+            if (isSelected) {
+                holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_not_selected)
+                GlobalScope.launch(Dispatchers.IO) {
+                    isSelected = false
+                    mApplicationViewModel!!.deleteHotelFavourite(hotelFavourite)
+                }
+            } else {
+                // User has selected favourite on a hotel
+                holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_selected)
+                GlobalScope.launch(Dispatchers.IO) {
+                    isSelected = true
+                    mApplicationViewModel!!.addHotelFavourite(hotelFavourite)
+                }
+            }
         }
-
     }
 
     override fun getItemCount(): Int {

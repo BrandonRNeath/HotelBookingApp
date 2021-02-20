@@ -1,7 +1,6 @@
 package com.brandon.hotelbookingapp.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,15 +52,16 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
         binding!!.locationsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        applicationViewModel = ViewModelProvider(this).get(ApplicationViewModel::class.java)
 
-        hotelListingAdapter = HotelListingAdapter(requireContext(), mutableListOf())
+        hotelListingAdapter =
+            HotelListingAdapter(applicationViewModel, requireContext(), mutableListOf())
 
         binding!!.hotelListingsRecyclerView.adapter = hotelListingAdapter
 
         binding!!.hotelListingsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        applicationViewModel = ViewModelProvider(this).get(ApplicationViewModel::class.java)
         applicationViewModel.getHotelListings().observe(viewLifecycleOwner, { hotelListings ->
             hotelListingAdapter.updateHotelListings(hotelListings)
         })

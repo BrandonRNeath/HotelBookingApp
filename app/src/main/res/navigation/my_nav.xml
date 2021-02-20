@@ -35,4 +35,9 @@
             android:name="locationName"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/hotelFavouritesFragment"
+        android:name="com.brandon.hotelbookingapp.ui.fragments.HotelFavouritesFragment"
+        android:label="hotel_favourites_fragment"
+        tools:layout="@layout/hotel_favourites_fragment" />
 </navigation>
