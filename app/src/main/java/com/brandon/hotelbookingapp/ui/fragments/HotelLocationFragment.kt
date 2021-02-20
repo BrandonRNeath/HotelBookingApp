@@ -8,25 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.brandon.hotelbookingapp.databinding.HotelLocationFragmentBinding
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class HotelLocationFragment : Fragment() {
 
-    private val args : HotelLocationFragmentArgs by navArgs()
-
-    private var param1: String? = null
-    private var param2: String? = null
+    private val args: HotelLocationFragmentArgs by navArgs()
 
     private var binding: HotelLocationFragmentBinding? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

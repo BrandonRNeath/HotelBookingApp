@@ -19,8 +19,15 @@ class ApplicationRepository(private val applicationDao: ApplicationDao) {
         return applicationDao.getHotelListings()
     }
 
+    fun updateHotelListing(favouriteStatus: Boolean, hotelListingId: Int) {
+        applicationDao.updateHotelListing(favouriteStatus, hotelListingId)
+    }
+
+    fun checkHotelFavouriteExists(hotelFavouriteId: Int): Boolean {
+        return applicationDao.checkHotelFavouriteExistsByCount(hotelFavouriteId) == 1
+    }
+
     fun getHotelFavourites(): LiveData<List<HotelFavourite>> {
         return applicationDao.getHotelFavourites()
     }
-
 }

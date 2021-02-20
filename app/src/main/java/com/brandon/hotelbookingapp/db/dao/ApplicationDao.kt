@@ -20,8 +20,14 @@ interface ApplicationDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertHotelListings(hotelListings: List<HotelListing>)
 
+    @Query("UPDATE hotel_listings_table SET isFavourite= :favouriteStatus WHERE id = :hotelListingId")
+    fun updateHotelListing(favouriteStatus: Boolean, hotelListingId: Int)
+
     @Query("SELECT * FROM hotel_listings_table")
     fun getHotelListings(): LiveData<List<HotelListing>>
+
+    @Query("SELECT COUNT() from hotel_favourites_table WHERE id =:hotelFavouriteId")
+    fun checkHotelFavouriteExistsByCount(hotelFavouriteId: Int): Int
 
     @Query("DELETE FROM hotel_favourites_table")
     fun wipeHotelFavourites()

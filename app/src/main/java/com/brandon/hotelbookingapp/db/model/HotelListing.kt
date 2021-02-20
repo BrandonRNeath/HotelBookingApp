@@ -12,5 +12,6 @@ data class HotelListing(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @SerializedName("hotel_name") val hotelName: String,
     @SerializedName("hotel_image_url") val hotelImageUrl: String,
-    @SerializedName("hotel_ranking") val hotelRating: Int
+    @SerializedName("hotel_ranking") val hotelRating: Int,
+    @SerializedName("is_favourite") val isFavourite: Boolean
 ) : Parcelable

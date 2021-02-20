@@ -41,17 +41,15 @@ class HotelListingAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelListingViewHolder {
-        val view: View =
+        return HotelListingViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.hotel_listing_view,
-                parent,
-                false
+                R.layout.hotel_listing_view, parent, false
             )
-        return HotelListingViewHolder(view)
+        )
     }
 
     override fun onBindViewHolder(holder: HotelListingViewHolder, position: Int) {
-        var isSelected = false
+        var isFavourite = hotelListings[position].isFavourite
 
         try {
             Glide.with(mContext!!)
@@ -76,7 +74,11 @@ class HotelListingAdapter(
         holder.hotelRatingFaceReview
             .setImageResource(calculateHotelReviewFace(hotelListings[position].hotelRating))
 
-        holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_not_selected)
+        if (isFavourite) {
+            holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_selected)
+        } else {
+            holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_not_selected)
+        }
 
         holder.favouriteStarImage.setOnClickListener {
             val hotelFavourite = HotelFavourite(
@@ -85,17 +87,19 @@ class HotelListingAdapter(
                 hotelName = hotelListings[position].hotelName,
                 hotelRating = hotelListings[position].hotelRating
             )
-            if (isSelected) {
+            if (isFavourite) {
                 holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_not_selected)
                 GlobalScope.launch(Dispatchers.IO) {
-                    isSelected = false
+                    isFavourite = false
+                    mApplicationViewModel!!.updateHotelListing(isFavourite, hotelListings[position].id)
                     mApplicationViewModel!!.deleteHotelFavourite(hotelFavourite)
                 }
             } else {
+                isFavourite = true
                 // User has selected favourite on a hotel
                 holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_selected)
                 GlobalScope.launch(Dispatchers.IO) {
-                    isSelected = true
+                    mApplicationViewModel!!.updateHotelListing(isFavourite, hotelListings[position].id)
                     mApplicationViewModel!!.addHotelFavourite(hotelFavourite)
                 }
             }

@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.brandon.hotelbookingapp.db.database.ApplicationDatabase
 import com.brandon.hotelbookingapp.db.repo.ApplicationRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class ApplicationViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -25,11 +27,21 @@ class ApplicationViewModel(application: Application) : AndroidViewModel(applicat
         applicationRepository.deleteHotelFavourite(hotelFavourite)
     }
 
-    fun getHotelListings() : LiveData<List<HotelListing>> {
+    fun getHotelListings(): LiveData<List<HotelListing>> {
         return applicationRepository.getHotelListings()
     }
 
-    fun getHotelFavourites() : LiveData<List<HotelFavourite>> {
+    fun updateHotelListing(favouriteStatus : Boolean, hotelListingId : Int) {
+        applicationRepository.updateHotelListing(favouriteStatus, hotelListingId)
+    }
+
+    suspend fun checkHotelFavouriteExists(hotelFavouriteId: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            applicationRepository.checkHotelFavouriteExists(hotelFavouriteId)
+        }
+    }
+
+    fun getHotelFavourites(): LiveData<List<HotelFavourite>> {
         return applicationRepository.getHotelFavourites()
     }
 }
