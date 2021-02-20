@@ -9,19 +9,22 @@
         android:id="@+id/homeFragment"
         android:name="com.brandon.hotelbookingapp.ui.fragments.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/home_fragment" >
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/navigate_to_settings"
             app:destination="@id/settingsFragment" />
         <action
             android:id="@+id/navigate_to_hotel_location"
             app:destination="@id/hotelLocationFragment" />
+        <action
+            android:id="@+id/navigate_to_selected_hotel"
+            app:destination="@id/selectedHotelFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.brandon.hotelbookingapp.ui.fragments.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/settings_fragment" >
+        tools:layout="@layout/settings_fragment">
         <action
             android:id="@+id/navigate_to_home"
             app:destination="@id/homeFragment" />
@@ -30,7 +33,7 @@
         android:id="@+id/hotelLocationFragment"
         android:name="com.brandon.hotelbookingapp.ui.fragments.HotelLocationFragment"
         android:label="hotel_location_fragment"
-        tools:layout="@layout/hotel_location_fragment" >
+        tools:layout="@layout/hotel_location_fragment">
         <argument
             android:name="locationName"
             app:argType="string" />
@@ -40,4 +43,13 @@
         android:name="com.brandon.hotelbookingapp.ui.fragments.HotelFavouritesFragment"
         android:label="hotel_favourites_fragment"
         tools:layout="@layout/hotel_favourites_fragment" />
+    <fragment
+        android:id="@+id/selectedHotelFragment"
+        android:name="com.brandon.hotelbookingapp.ui.fragments.SelectedHotelFragment"
+        android:label="selected_hotel_fragment"
+        tools:layout="@layout/selected_hotel_fragment">
+        <argument
+            android:name="hotelName"
+            app:argType="string" />
+    </fragment>
 </navigation>

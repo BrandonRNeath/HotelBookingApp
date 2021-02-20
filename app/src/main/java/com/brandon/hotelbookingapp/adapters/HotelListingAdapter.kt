@@ -7,15 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.db.model.ApplicationViewModel
 import com.brandon.hotelbookingapp.db.model.HotelFavourite
 import com.brandon.hotelbookingapp.db.model.HotelListing
+import com.brandon.hotelbookingapp.ui.fragments.HomeFragmentDirections
 import com.brandon.hotelbookingapp.utils.AppUtils.calculateHotelReviewFace
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class HotelListingAdapter(
@@ -38,6 +41,7 @@ class HotelListingAdapter(
         val hotelRating: TextView = view.findViewById(R.id.hotel_rating_tv)
         val hotelRatingFaceReview: ImageView = view.findViewById(R.id.hotel_face_review_iv)
         val favouriteStarImage: ImageView = view.findViewById(R.id.favourite_star_iv)
+        val hotelListingLayout : ConstraintLayout = view.findViewById(R.id.hotel_listing_layout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelListingViewHolder {
@@ -89,7 +93,7 @@ class HotelListingAdapter(
             )
             if (isFavourite) {
                 holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_not_selected)
-                GlobalScope.launch(Dispatchers.IO) {
+                mApplicationViewModel!!.viewModelScope.launch(Dispatchers.IO) {
                     isFavourite = false
                     mApplicationViewModel!!.updateHotelListing(isFavourite, hotelListings[position].id)
                     mApplicationViewModel!!.deleteHotelFavourite(hotelFavourite)
@@ -98,11 +102,17 @@ class HotelListingAdapter(
                 isFavourite = true
                 // User has selected favourite on a hotel
                 holder.favouriteStarImage.setImageResource(R.drawable.favourite_star_selected)
-                GlobalScope.launch(Dispatchers.IO) {
+                mApplicationViewModel!!.viewModelScope.launch(Dispatchers.IO) {
                     mApplicationViewModel!!.updateHotelListing(isFavourite, hotelListings[position].id)
                     mApplicationViewModel!!.addHotelFavourite(hotelFavourite)
                 }
             }
+        }
+
+        holder.hotelListingLayout.setOnClickListener {
+            val action =
+                HomeFragmentDirections.navigateToSelectedHotel(hotelListings[position].hotelName)
+             Navigation.findNavController(holder.itemView).navigate(action)
         }
     }
 
