@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
-        <item android:title="@string/settings"
+        <item
             android:id="@+id/settingsFragment"
             android:icon="@drawable/settings_icon_24"
-            />
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/hotelFavouritesFragment"
+            android:icon="@drawable/favourite_star_selected"
+            android:title="@string/favourites" />
     </group>
 </menu>

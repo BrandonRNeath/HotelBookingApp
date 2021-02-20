@@ -4,7 +4,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -49,10 +48,6 @@ class MainActivity : AppCompatActivity() {
         applicationViewModel.getHotelListings().observe(this, { hotels ->
             Log.d(TAG, hotels.toString())
         })
-    }
-
-    private fun setupUI() {
-
     }
 
     override fun onResume() {
