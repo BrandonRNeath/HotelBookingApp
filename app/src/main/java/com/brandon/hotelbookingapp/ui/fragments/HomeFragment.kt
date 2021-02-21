@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.adapters.HotelListingAdapter
@@ -15,14 +15,17 @@ import com.brandon.hotelbookingapp.databinding.HomeFragmentBinding
 import com.brandon.hotelbookingapp.db.model.ApplicationViewModel
 import com.brandon.hotelbookingapp.model.HotelLocations
 import com.brandon.hotelbookingapp.utils.AppUtils.isWifiAvailable
+import dagger.hilt.android.AndroidEntryPoint
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.home_fragment) {
 
-    private lateinit var applicationViewModel: ApplicationViewModel
+    private val applicationViewModel: ApplicationViewModel by navGraphViewModels(R.id.my_nav) { defaultViewModelProviderFactory }
+
     private var binding: HomeFragmentBinding? = null
     private var param1: String? = null
     private var param2: String? = null
@@ -40,19 +43,25 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        applicationViewModel.getHotelListings().observe(viewLifecycleOwner, { hotelListings ->
+            hotelListingAdapter.updateHotelListings(hotelListings)
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        binding = HomeFragmentBinding.inflate(layoutInflater)
+        binding = HomeFragmentBinding.inflate(inflater, container,false)
         binding!!.locationsRecyclerView.adapter =
             HotelLocationsAdapter(requireContext(), mLocations)
 
         binding!!.locationsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        applicationViewModel = ViewModelProvider(this).get(ApplicationViewModel::class.java)
 
         hotelListingAdapter =
             HotelListingAdapter(applicationViewModel, requireContext(), mutableListOf())
@@ -61,12 +70,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
         binding!!.hotelListingsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
-        applicationViewModel.getHotelListings().observe(viewLifecycleOwner, { hotelListings ->
-            hotelListingAdapter.updateHotelListings(hotelListings)
-        })
-
-
         return binding!!.root
     }
 

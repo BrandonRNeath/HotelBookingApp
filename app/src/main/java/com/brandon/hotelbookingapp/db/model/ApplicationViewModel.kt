@@ -1,23 +1,16 @@
 package com.brandon.hotelbookingapp.db.model
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
-import com.brandon.hotelbookingapp.db.database.ApplicationDatabase
-import com.brandon.hotelbookingapp.db.repo.ApplicationRepository
+import androidx.lifecycle.ViewModel
+import com.brandon.hotelbookingapp.db.repo.ApplicationRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class ApplicationViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val applicationRepository: ApplicationRepository
-
-    init {
-        val applicationDao = ApplicationDatabase
-            .getDatabase(application, viewModelScope, application.resources).hotelApplicationDao()
-        applicationRepository = ApplicationRepository(applicationDao)
-    }
+@HiltViewModel
+class ApplicationViewModel @Inject constructor(private val applicationRepository: ApplicationRepositoryImpl) :
+    ViewModel() {
 
     fun addHotelFavourite(hotelFavourite: HotelFavourite) {
         applicationRepository.addHotelFavourite(hotelFavourite)
@@ -31,7 +24,7 @@ class ApplicationViewModel(application: Application) : AndroidViewModel(applicat
         return applicationRepository.getHotelListings()
     }
 
-    fun updateHotelListing(favouriteStatus : Boolean, hotelListingId : Int) {
+    fun updateHotelListing(favouriteStatus: Boolean, hotelListingId: Int) {
         applicationRepository.updateHotelListing(favouriteStatus, hotelListingId)
     }
 

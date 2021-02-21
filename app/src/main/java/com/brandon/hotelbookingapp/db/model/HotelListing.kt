@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "hotel_listings_table")
 @Parcelize
 data class HotelListing(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey val id: Int,
     @SerializedName("hotel_name") val hotelName: String,
     @SerializedName("hotel_image_url") val hotelImageUrl: String,
     @SerializedName("hotel_ranking") val hotelRating: Int,

@@ -2,9 +2,7 @@ package com.brandon.hotelbookingapp.ui
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,14 +11,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.databinding.ActivityMainBinding
-import com.brandon.hotelbookingapp.db.model.ApplicationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var applicationViewModel: ApplicationViewModel
     private var binding: ActivityMainBinding? = null
     private lateinit var navigationController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
@@ -43,11 +39,6 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.purple_200)))
             }
         }
-
-        applicationViewModel = ViewModelProvider(this).get(ApplicationViewModel::class.java)
-        applicationViewModel.getHotelListings().observe(this, { hotels ->
-            Log.d(TAG, hotels.toString())
-        })
     }
 
     override fun onResume() {

@@ -5,6 +5,7 @@
     <string name="settings">Settings</string>
     <string name="favourites">Favourites</string>
     <string name="no_internet_connection_active_error">No internet connection active</string>
-    <string name="loading_hotel_location_images_error">An Error has occurred when loading Hotel Location images </string>
-    <string name="loading_hotel_listing_images_error">An Error has occurred when loading Hotel Listing images </string>
+    <string name="loading_hotel_location_images_error">An error has occurred when loading Hotel Location images </string>
+    <string name="loading_hotel_listing_images_error">An error has occurred when loading Hotel Listing images </string>
+    <string name="populate_hotel_listing_error">An error has occurred when populating database with Hotel Listings</string>
 </resources>
