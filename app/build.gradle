@@ -57,7 +57,6 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-fragment:$hilt_androidx_version"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_androidx_version"
     implementation "androidx.hilt:hilt-work:$hilt_androidx_version"
-    implementation 'androidx.hilt:hilt-work:1.0.0-alpha03'
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_androidx_version"
 
