@@ -10,24 +10,25 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.brandon.hotelbookingapp.R
-import com.brandon.hotelbookingapp.model.HotelLocations
+import com.brandon.hotelbookingapp.db.model.ApplicationViewModel
+import com.brandon.hotelbookingapp.db.model.HotelLocations
 import com.brandon.hotelbookingapp.ui.fragments.HomeFragmentDirections
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
-import java.lang.Exception
 
 
 class HotelLocationsAdapter(
+    applicationViewModel: ApplicationViewModel,
     context: Context,
-    locations: ArrayList<HotelLocations>
+    private val hotelLocations: MutableList<HotelLocations>
 ) : RecyclerView.Adapter<HotelLocationsAdapter.HotelLocationsViewHolder>() {
 
-    private var mLocations: ArrayList<HotelLocations> = ArrayList()
     private var mContext: Context? = null
+    private var mApplicationViewModel: ApplicationViewModel?
 
     init {
         mContext = context
-        mLocations = locations
+        mApplicationViewModel = applicationViewModel
     }
 
     inner class HotelLocationsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -51,28 +52,35 @@ class HotelLocationsAdapter(
         try {
             Glide.with(mContext!!)
                 .asBitmap()
-                .load(mLocations[position].locationUrl)
+                .load(hotelLocations[position].locationImageUrl)
                 .placeholder(R.drawable.loading_image_default_placeholder)
                 .error(R.drawable.location_placeholder_24)
                 .into(holder.location)
         } catch (ex: Exception) {
-            Log.e(TAG, mContext!!
+            Log.e(
+                TAG, mContext!!
                     .getString(R.string.loading_hotel_location_images_error) + ex.printStackTrace()
             )
         }
 
-        holder.locationName.text = mLocations[position].locationName
+        holder.locationName.text = hotelLocations[position].locationName
 
         holder.parentLayout.setOnClickListener {
-            Log.d(TAG, "Clicked ${mLocations[position].locationName}")
+            Log.d(TAG, "Clicked ${hotelLocations[position].locationName}")
             val action =
-                HomeFragmentDirections.navigateToHotelLocation(mLocations[position].locationName)
+                HomeFragmentDirections.navigateToHotelLocation(hotelLocations[position].locationName)
             Navigation.findNavController(holder.itemView).navigate(action)
         }
     }
 
     override fun getItemCount(): Int {
-        return mLocations.size
+        return hotelLocations.size
+    }
+
+    fun updateHotelLocations(hotelLocations: List<HotelLocations>) {
+        this.hotelLocations.clear()
+        this.hotelLocations.addAll(hotelLocations)
+        notifyDataSetChanged()
     }
 
     companion object {

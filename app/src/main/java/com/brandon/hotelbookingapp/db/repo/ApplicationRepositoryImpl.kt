@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.brandon.hotelbookingapp.db.dao.ApplicationDao
 import com.brandon.hotelbookingapp.db.model.HotelFavourite
 import com.brandon.hotelbookingapp.db.model.HotelListing
+import com.brandon.hotelbookingapp.db.model.HotelLocations
 import javax.inject.Inject
 
 class ApplicationRepositoryImpl @Inject constructor(private val applicationDao: ApplicationDao) : ApplicationRepository {
@@ -30,5 +31,9 @@ class ApplicationRepositoryImpl @Inject constructor(private val applicationDao: 
 
     override fun getHotelFavourites(): LiveData<List<HotelFavourite>> {
         return applicationDao.getHotelFavourites()
+    }
+
+    override fun getHotelLocations(): LiveData<List<HotelLocations>> {
+        return applicationDao.getHotelLocations()
     }
 }

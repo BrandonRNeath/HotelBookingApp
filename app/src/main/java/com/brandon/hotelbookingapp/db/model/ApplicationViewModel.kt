@@ -24,6 +24,10 @@ class ApplicationViewModel @Inject constructor(private val applicationRepository
         return applicationRepository.getHotelListings()
     }
 
+    fun getHotelLocations(): LiveData<List<HotelLocations>> {
+        return applicationRepository.getHotelLocations()
+    }
+
     fun updateHotelListing(favouriteStatus: Boolean, hotelListingId: Int) {
         applicationRepository.updateHotelListing(favouriteStatus, hotelListingId)
     }
