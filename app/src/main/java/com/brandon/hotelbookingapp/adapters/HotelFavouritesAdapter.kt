@@ -9,13 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.brandon.hotelbookingapp.R
-import com.brandon.hotelbookingapp.db.model.HotelFavourite
+import com.brandon.hotelbookingapp.db.model.HotelListing
 import com.brandon.hotelbookingapp.utils.AppUtils.calculateHotelReviewFace
 import com.bumptech.glide.Glide
 
 class HotelFavouritesAdapter(
     context: Context,
-    private val hotelFavourites: MutableList<HotelFavourite>
+    private val hotelFavourites: MutableList<HotelListing>
 ) : RecyclerView.Adapter<HotelFavouritesAdapter.HotelFavouritesViewHolder>() {
 
     private var mContext: Context? = null
@@ -52,6 +52,10 @@ class HotelFavouritesAdapter(
 
         holder.hotelName.text = hotelFavourites[position].hotelName
 
+        val priceAverage = "Prices from £" + hotelFavourites[position].priceAverage.toString()
+
+        holder.priceAverage.text = priceAverage
+
         holder.hotelRating.text = hotelRatingText
 
         holder.hotelRatingFaceReview
@@ -63,7 +67,7 @@ class HotelFavouritesAdapter(
 
     }
 
-    fun updateHotelFavourites(hotelFavourites: List<HotelFavourite>) {
+    fun updateHotelFavourites(hotelFavourites: List<HotelListing>) {
         this.hotelFavourites.clear()
         this.hotelFavourites.addAll(hotelFavourites)
         notifyDataSetChanged()
@@ -76,6 +80,7 @@ class HotelFavouritesAdapter(
     inner class HotelFavouritesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val hotelImage: ImageView = view.findViewById(R.id.hotel_iv)
         val hotelName: TextView = view.findViewById(R.id.hotel_name_tv)
+        val priceAverage: TextView = view.findViewById(R.id.price_average_tv)
         val hotelRating: TextView = view.findViewById(R.id.hotel_rating_tv)
         val hotelRatingFaceReview: ImageView = view.findViewById(R.id.hotel_face_review_iv)
         val favouriteStarImage: ImageView = view.findViewById(R.id.favourite_star_iv)

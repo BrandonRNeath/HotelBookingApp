@@ -3,6 +3,8 @@
     "id": 1,
     "hotel_name": "London Hotel",
     "hotel_image_url": "https://i.imgur.com/pq16dcf.jpg",
+    "hotel_location": "London",
+    "price_average": 35,
     "hotel_ranking": 85,
     "is_favourite": false
   },
@@ -10,6 +12,8 @@
     "id": 2,
     "hotel_name": "Underwater Hotel",
     "hotel_image_url": "https://i.imgur.com/HFzX8Pr.jpeg",
+    "hotel_location": "Unknown",
+    "price_average": 75,
     "hotel_ranking": 23,
     "is_favourite": false
   },
@@ -17,6 +21,8 @@
     "id": 3,
     "hotel_name": "Bora Bora Hotel",
     "hotel_image_url": "https://i.imgur.com/6eS1mymb.jpg",
+    "hotel_location": "London",
+    "price_average": 102,
     "hotel_ranking": 54,
     "is_favourite": false
   }
