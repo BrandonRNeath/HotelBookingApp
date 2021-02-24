@@ -14,6 +14,7 @@ buildscript {
         gson_version = '2.8.6'
         work_version = '2.5.0'
         timber_version = '4.7.1'
+        leak_canary_version = '2.6'
     }
 
     repositories {
