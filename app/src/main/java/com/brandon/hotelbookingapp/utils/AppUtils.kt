@@ -4,10 +4,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import com.brandon.hotelbookingapp.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 object AppUtils {
-    
+
     fun isWifiAvailable(context: Context) =
         (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).run {
             getNetworkCapabilities(activeNetwork)?.run {
@@ -27,5 +29,9 @@ object AppUtils {
         }
 
         return result
+    }
+
+    fun getCurrentDate(): String {
+        return SimpleDateFormat("EEE, d MMM", Locale.getDefault()).format(Date())
     }
 }

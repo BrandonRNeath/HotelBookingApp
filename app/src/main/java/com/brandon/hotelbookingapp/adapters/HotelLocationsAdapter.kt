@@ -1,7 +1,6 @@
 package com.brandon.hotelbookingapp.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import com.brandon.hotelbookingapp.db.model.HotelLocations
 import com.brandon.hotelbookingapp.ui.fragments.HomeFragmentDirections
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
+import timber.log.Timber
 
 
 class HotelLocationsAdapter(
@@ -57,16 +57,13 @@ class HotelLocationsAdapter(
                 .error(R.drawable.location_placeholder_24)
                 .into(holder.location)
         } catch (ex: Exception) {
-            Log.e(
-                TAG, mContext!!
-                    .getString(R.string.loading_hotel_location_images_error) + ex.printStackTrace()
-            )
+            Timber.e(ex, mContext!!.getString(R.string.loading_hotel_location_images_error))
         }
 
         holder.locationName.text = hotelLocations[position].locationName
 
         holder.parentLayout.setOnClickListener {
-            Log.d(TAG, "Clicked ${hotelLocations[position].locationName}")
+            Timber.d("Clicked ${hotelLocations[position].locationName}")
             val action =
                 HomeFragmentDirections.navigateToHotelLocation(hotelLocations[position].locationName)
             Navigation.findNavController(holder.itemView).navigate(action)

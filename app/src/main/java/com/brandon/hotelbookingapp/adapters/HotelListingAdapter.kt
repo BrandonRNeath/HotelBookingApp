@@ -1,7 +1,6 @@
 package com.brandon.hotelbookingapp.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import com.brandon.hotelbookingapp.utils.AppUtils.calculateHotelReviewFace
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class HotelListingAdapter(
     applicationViewModel: ApplicationViewModel,
@@ -63,10 +63,7 @@ class HotelListingAdapter(
                 .error(R.drawable.location_placeholder_24)
                 .into(holder.hotelImage)
         } catch (ex: Exception) {
-            Log.e(
-                TAG, mContext!!
-                    .getString(R.string.loading_hotel_listing_images_error) + ex.printStackTrace()
-            )
+            Timber.e(ex, mContext!!.getString(R.string.loading_hotel_listing_images_error))
         }
 
         val hotelRatingText = "${hotelListings[position].hotelRating}/100"

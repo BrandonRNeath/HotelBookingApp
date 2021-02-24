@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.brandon.hotelbookingapp.db.dao.ApplicationDao
 import com.brandon.hotelbookingapp.db.database.ApplicationDatabase
+import com.brandon.hotelbookingapp.utils.APPLICATION_DB_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +27,7 @@ class DatabaseModule {
         return Room.databaseBuilder(
             context,
             ApplicationDatabase::class.java,
-            "hotel_app_db"
+            APPLICATION_DB_NAME
         ).build()
     }
 }

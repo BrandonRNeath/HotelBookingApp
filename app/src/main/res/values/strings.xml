@@ -8,4 +8,5 @@
     <string name="loading_hotel_location_images_error">An error has occurred when loading Hotel Location images </string>
     <string name="loading_hotel_listing_images_error">An error has occurred when loading Hotel Listing images </string>
     <string name="populate_hotel_listing_error">An error has occurred when populating database with Hotel Listings</string>
+    <string name="populate_hotel_locations_error">An error has occurred when populating database with Hotel Locations</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.brandon.hotelbookingapp.workers
 
 import android.content.Context
-import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
@@ -13,6 +12,7 @@ import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
+import timber.log.Timber
 
 @HiltWorker
 class PopulateHotelListingTable @AssistedInject constructor(
@@ -21,9 +21,9 @@ class PopulateHotelListingTable @AssistedInject constructor(
     private val applicationDatabase: ApplicationDatabase
 ) : CoroutineWorker(context, workerParameters) {
 
-   companion object {
-       private const val TAG = "PopulateHotelListingTable"
-   }
+    companion object {
+        private const val TAG = "PopulateHotelListingTable"
+    }
 
     override suspend fun doWork(): Result {
         return try {
@@ -37,7 +37,7 @@ class PopulateHotelListingTable @AssistedInject constructor(
             }
             Result.success()
         } catch (ex: Exception) {
-            Log.d(TAG, applicationContext.getString(R.string.populate_hotel_listing_error))
+            Timber.e(ex, applicationContext.getString(R.string.populate_hotel_listing_error))
             Result.failure()
         }
     }

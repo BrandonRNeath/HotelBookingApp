@@ -87,4 +87,7 @@ dependencies {
     // WorkManager dependency
     implementation "androidx.work:work-runtime-ktx:$work_version"
 
+    // Timber dependency
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
 }
