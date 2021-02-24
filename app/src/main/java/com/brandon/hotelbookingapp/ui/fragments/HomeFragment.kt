@@ -14,7 +14,6 @@ import com.brandon.hotelbookingapp.databinding.HomeFragmentBinding
 import com.brandon.hotelbookingapp.db.model.ApplicationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.home_fragment) {
 
@@ -26,13 +25,19 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        applicationViewModel.getHotelListings().observe(viewLifecycleOwner, { hotelListings ->
-            hotelListingAdapter.updateHotelListings(hotelListings)
-        })
-        applicationViewModel.getHotelLocations().observe(viewLifecycleOwner, { hotelLocations ->
-            hotelLocations.shuffled()
-            hotelLocationsAdapter.updateHotelLocations(hotelLocations)
-        })
+        applicationViewModel.getHotelListings().observe(
+            viewLifecycleOwner,
+            { hotelListings ->
+                hotelListingAdapter.updateHotelListings(hotelListings)
+            }
+        )
+        applicationViewModel.getHotelLocations().observe(
+            viewLifecycleOwner,
+            { hotelLocations ->
+                hotelLocations.shuffled()
+                hotelLocationsAdapter.updateHotelLocations(hotelLocations)
+            }
+        )
     }
 
     override fun onCreateView(

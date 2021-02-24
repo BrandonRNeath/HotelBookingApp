@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import timber.log.Timber
 
-
 class HotelLocationsAdapter(
     applicationViewModel: ApplicationViewModel,
     context: Context,

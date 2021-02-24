@@ -23,13 +23,17 @@ class HotelFavouritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        applicationViewModel.getHotelFavourites().observe(viewLifecycleOwner, { hotelFavourites ->
-            hotelFavouritesAdapter.updateHotelFavourites(hotelFavourites)
-        })
+        applicationViewModel.getHotelFavourites().observe(
+            viewLifecycleOwner,
+            { hotelFavourites ->
+                hotelFavouritesAdapter.updateHotelFavourites(hotelFavourites)
+            }
+        )
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment

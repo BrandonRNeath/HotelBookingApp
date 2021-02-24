@@ -34,5 +34,4 @@ interface ApplicationDao {
 
     @Query("DELETE FROM hotel_locations_table")
     fun wipeHotelLocations()
-
 }

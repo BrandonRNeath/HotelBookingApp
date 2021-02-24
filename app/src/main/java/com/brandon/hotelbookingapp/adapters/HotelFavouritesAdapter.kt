@@ -61,7 +61,6 @@ class HotelFavouritesAdapter(
         // As view is reused from hotel listing view favourite star is hidden as is redundant
         holder.favouriteStarImage.isEnabled = false
         holder.favouriteStarImage.visibility = View.INVISIBLE
-
     }
 
     fun updateHotelFavourites(hotelFavourites: List<HotelListing>) {
@@ -86,5 +85,4 @@ class HotelFavouritesAdapter(
     companion object {
         private const val TAG = "HotelFavouritesAdapter"
     }
-
 }

@@ -21,7 +21,8 @@ class SelectedHotelFragment : Fragment() {
     private val applicationViewModel: ApplicationViewModel by navGraphViewModels(R.id.my_nav) { defaultViewModelProviderFactory }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
@@ -30,7 +31,6 @@ class SelectedHotelFragment : Fragment() {
         binding!!.selectedHotelNameTv.text = args.hotelName
 
         return binding!!.root
-
     }
 
     override fun onDestroyView() {

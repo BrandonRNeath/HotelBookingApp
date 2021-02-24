@@ -37,11 +37,11 @@ class HotelListingAdapter(
     inner class HotelListingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val hotelImage: ImageView = view.findViewById(R.id.hotel_iv)
         val hotelName: TextView = view.findViewById(R.id.hotel_name_tv)
-        val priceAverage : TextView = view.findViewById(R.id.price_average_tv)
+        val priceAverage: TextView = view.findViewById(R.id.price_average_tv)
         val hotelRating: TextView = view.findViewById(R.id.hotel_rating_tv)
         val hotelRatingFaceReview: ImageView = view.findViewById(R.id.hotel_face_review_iv)
         val favouriteStarImage: ImageView = view.findViewById(R.id.favourite_star_iv)
-        val hotelListingLayout : ConstraintLayout = view.findViewById(R.id.hotel_listing_layout)
+        val hotelListingLayout: ConstraintLayout = view.findViewById(R.id.hotel_listing_layout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelListingViewHolder {
@@ -105,7 +105,7 @@ class HotelListingAdapter(
         holder.hotelListingLayout.setOnClickListener {
             val action =
                 HomeFragmentDirections.navigateToSelectedHotel(hotelListings[position].hotelName)
-             Navigation.findNavController(holder.itemView).navigate(action)
+            Navigation.findNavController(holder.itemView).navigate(action)
         }
     }
 

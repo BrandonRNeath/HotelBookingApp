@@ -7,7 +7,9 @@ import android.widget.LinearLayout
 import com.brandon.hotelbookingapp.databinding.HotelListingViewBinding
 
 class HotelListingView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
     val binding = HotelListingViewBinding.inflate(LayoutInflater.from(context))

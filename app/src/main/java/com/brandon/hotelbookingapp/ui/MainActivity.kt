@@ -13,7 +13,6 @@ import com.brandon.hotelbookingapp.R
 import com.brandon.hotelbookingapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         listener = NavController.OnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.homeFragment) {
                 supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.teal_200)))
-            } else if(destination.id == R.id.settingsFragment) {
+            } else if (destination.id == R.id.settingsFragment) {
                 supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.purple_200)))
             }
         }

@@ -20,7 +20,8 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
     private val applicationViewModel: ApplicationViewModel by navGraphViewModels(R.id.my_nav) { defaultViewModelProviderFactory }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
@@ -42,6 +43,5 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
         fun newInstance() = SettingsFragment()
 
         private const val TAG = "SettingsFragment"
-
     }
 }

@@ -5,8 +5,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import com.brandon.hotelbookingapp.R
 import java.text.SimpleDateFormat
-import java.util.*
-
+import java.util.Date
+import java.util.Locale
 
 object AppUtils {
 
